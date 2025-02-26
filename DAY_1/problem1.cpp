@@ -33,35 +33,37 @@ public:
     }
 };
 
-// Alternate Method - Using Set
+// Alternate Method - Checking Factors
 
 class Solution
 {
 public:
+    bool checki(int i)
+    {
+        if (i == 1)
+        {
+            return true;
+        }
+        if ((i % 2 != 0 && i % 3 != 0 && i % 5 != 0))
+        {
+            return false;
+        }
+        return true;
+    }
     bool isUgly(int n)
     {
         if (n <= 0)
         {
             return false;
         }
-        vector <int> v;
         for (int i = 1; i <= sqrt(n); i++)
         {
             if (n % i == 0)
             {
-                v.emplace_back(i);
-                v.emplace_back(n/i);
-            }
-        }
-        for (auto it : v)
-        {
-            if (it == 1)
-            {
-                continue;
-            }
-            if ((it % 2 != 0 && it % 3 != 0 && it % 5 != 0))
-            {
-                return false;
+                if (checki(i) != 1 || checki(n / i) != 1)
+                {
+                    return false;
+                }
             }
         }
         return true;
