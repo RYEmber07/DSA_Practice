@@ -44,16 +44,16 @@ public:
         {
             return false;
         }
-        unordered_set<int> st;
+        vector <int> v;
         for (int i = 1; i <= sqrt(n); i++)
         {
             if (n % i == 0)
             {
-                st.insert(i);
-                st.insert(n / i);
+                v.emplace_back(i);
+                v.emplace_back(n/i);
             }
         }
-        for (auto it : st)
+        for (auto it : v)
         {
             if (it == 1)
             {
