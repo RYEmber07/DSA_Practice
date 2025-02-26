@@ -44,7 +44,7 @@ public:
         {
             return false;
         }
-        set<int> st;
+        unordered_set<int> st;
         for (int i = 1; i <= sqrt(n); i++)
         {
             if (n % i == 0)
