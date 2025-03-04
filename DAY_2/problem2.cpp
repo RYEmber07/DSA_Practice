@@ -4,7 +4,7 @@
 class Solution
 {
 public:
-    vector<vector<int>> mergeArrays(vector<vector<int>> &nums1, vector<vector<int>> &nums2)
+    vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2)
     {
         vector<vector<int>> ans;
         int p1 = 0, p2 = 0;
