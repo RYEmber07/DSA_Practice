@@ -17,7 +17,7 @@ public:
         if (children == 1 && money == 3) {
             count--;
         }
-        if (money > 0 && children == 0) {
+        if (children == 0 && money > 0) {
             return count - 1;
         }
         return count;
