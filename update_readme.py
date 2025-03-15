@@ -15,7 +15,6 @@ def detect_existing_folders():
                 topic_match = re.search(r"\(([^)]+)\)", folder)
                 # Keep empty if no topic
                 topic = f" ({topic_match.group(1)})" if topic_match else ""
-                # Store (number, folder name, topic)
                 folders.append((day_num, folder, topic))
     return folders
 
