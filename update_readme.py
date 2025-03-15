@@ -44,7 +44,8 @@ def update_readme():
     folders = detect_existing_folders()
     new_practice_days = "| 📅 Day | 🔗 Link |\n|--------|---------|\n"
     for day_num, folder_link, topic in folders:
-        encoded_link = quote(folder_link)  # Encode for URLs
+        # Fix encoding for GitHub links
+        encoded_link = quote(folder_link, safe='()')
         new_practice_days += f"| 🟢 DAY {day_num}{topic} | [DAY_{day_num}]({encoded_link}) |\n"
 
     updated_lines = lines[:start_index] + \
