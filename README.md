@@ -10,11 +10,12 @@ Each folder represents a **day of practice** and contains coding problems along 
 
 ---
 
-## 📅 **Practice Days**
+## 📅 Practice Days  
 🔹 Click on any **Day** to explore the problems!
 
 | 📅 **Day**  | 🔗 **Link** |
 |------------|-------------|
+| 🟢 **Day 00**  | [DAY_00](./DAY_00/) |
 | 🟢 **Day 01**  | [DAY_01](./DAY_01/) |
 | 🟢 **Day 02**  | [DAY_02](./DAY_02/) |
 | 🟢 **Day 03**  | [DAY_03](./DAY_03/) |
@@ -30,4 +31,21 @@ Each folder represents a **day of practice** and contains coding problems along 
 | 🟢 **Day 13**  | [DAY_13](./DAY_13/) |
 
 ---
+## 🔥 Clone the Repository  
+To get started with this repository, run the following commands:  
+
+```sh
+# Clone the repository  
+git clone https://github.com/YourUsername/DSA_Practice.git  
+
+# Navigate into the project directory  
+cd DSA_Practice
+
+## ✍️ Signing Off  
+Thanks for stopping by! 😃 This repository is my **journey through DSA**—learning, practicing, and improving one problem at a time.  
+If you found this helpful, consider **starring ⭐ the repo**, sharing it, or contributing.  
+
+Until next time, **happy coding & keep solving! 🚀**  
+
+**~ RYEMBER07 **  
 
