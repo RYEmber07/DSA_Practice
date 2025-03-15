@@ -1,51 +1,39 @@
 import os
-import re
 
-# Constants
-README_FILE = "README.md"
-HEADER = """# 🚀 DSA Practice Repository
-Welcome to my DSA Practice Repository! 🎯 This is where I store my daily practice problems for Data Structures and Algorithms (DSA). Each day contains 2-3 coding problems with solutions.
+# Get all directories that start with "DAY_"
+folders = sorted(
+    [f for f in os.listdir() if f.startswith("DAY_") and os.path.isdir(f)],
+    # Extract only the number for sorting
+    key=lambda x: int(x.split("_")[1].split()[0])
+)
 
-📂 **Folder Structure**
-Each folder represents a day of practice and contains coding problems along with solutions.
+# Generate markdown content
+lines = []
 
-📅 **Practice Days**
-🔹 Click on any Day to explore the problems!
+# Section: Practice Days
+lines.append("## 📅 Practice Days")  # Make it a header
+lines.append("🔹 Click on any Day to explore the problems!\n")  # Description
+lines.append("| 📅 Day | 🔗 Link |")
+lines.append("|---|---|")
 
-| 📅 Day | 🔗 Link |
-|--------|---------|
-"""
+for folder in folders:
+    parts = folder.split("_", 1)  # Splitting at first "_"
+    day_number = parts[1].split()[0]  # Extract just the number
+    day_name = parts[1]  # Keep full folder name for display
 
-FOOTER = """\n✍️ **Signing Off**
-Thanks for stopping by! 😃 This repository is my journey through DSA—learning, practicing, and improving one problem at a time. If you found this helpful, consider starring ⭐ the repo, sharing it, or contributing.
+    # Show full name but keep clean link
+    lines.append(f"| 🟢 {day_name} | [{day_number}]({folder}) |")
 
-Until next time, happy coding & keep solving! 🚀
-
-~ RYEMBER07
-"""
-
-# Get all folders that start with "DAY_"
-folders = [f for f in os.listdir() if f.startswith("DAY_")
-           and os.path.isdir(f)]
-
-# Extract numeric day values safely
-
-
-def extract_day_number(folder_name):
-    match = re.search(r"DAY_(\d+)", folder_name)  # Extracts only the number
-    # Default to inf if no number
-    return int(match.group(1)) if match else float('inf')
-
-
-# Sort folders by their extracted numeric day
-folders = sorted(folders, key=extract_day_number)
-
-# Generate table rows
-rows = [
-    f"| 🟢 {folder.replace('_', ' ')} | [{folder}]({folder}) |" for folder in folders]
+# Section: Signing Off
+lines.append("\n## ✍️ Signing Off")  # Now "Signing Off" is also a header
+lines.append(
+    "Thanks for stopping by! 😃 This repository is my journey through DSA—learning, practicing, "
+    "and improving one problem at a time. If you found this helpful, consider starring ⭐ the repo, "
+    "sharing it, or contributing.\n"
+)
+lines.append("Until next time, happy coding & keep solving! 🚀\n")
+lines.append("~ RYEMBER07")
 
 # Write to README.md
-with open(README_FILE, "w", encoding="utf-8") as f:
-    f.write(HEADER + "\n".join(rows) + FOOTER)
-
-print("✅ README.md updated successfully!")
+with open("README.md", "w", encoding="utf-8") as f:
+    f.write("\n".join(lines))
