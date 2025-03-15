@@ -26,7 +26,7 @@ Each folder represents a **day of practice** and contains coding problems along 
 | 🟢 DAY 09 | [DAY_09](DAY_09) |
 | 🟢 DAY 10 | [DAY_10](DAY_10) |
 | 🟢 DAY 11 | [DAY_11](DAY_11) |
-| 🟢 DAY 12 (Binary Search) | [DAY_12](DAY_12) |
+| 🟢 DAY 12 (Binary Search) | [DAY_12 (Binary Search)](DAY_12%20%28Binary%20Search%29) |
 | 🟢 DAY 13 | [DAY_13](DAY_13) |
 ## ✍️ Signing Off
 Thanks for stopping by! 😃 This repository is my journey through DSA—learning, practicing, and improving one problem at a time.

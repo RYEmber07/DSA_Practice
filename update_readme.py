@@ -1,6 +1,6 @@
 import os
 import re
-from urllib.parse import quote
+from urllib.parse import quote  # Encode folder names for GitHub links
 
 README_FILE = "README.md"
 
@@ -14,9 +14,7 @@ def detect_existing_folders():
                 day_num = match.group(1)
                 topic_match = re.search(r"\(([^)]+)\)", folder)
                 topic = f" ({topic_match.group(1)})" if topic_match else ""
-                # Ensure only "DAY_XX" is linked
-                folder_link = f"DAY_{day_num}"
-                folders.append((day_num, folder_link, topic))
+                folders.append((day_num, folder, topic))
     return folders
 
 
@@ -32,7 +30,7 @@ def update_readme():
     end_index = None
     for i, line in enumerate(lines):
         if "📅 Practice Days" in line:
-            start_index = i + 2
+            start_index = i + 2  # Start after header
         if "✍️ Signing Off" in line:
             end_index = i
             break
@@ -43,10 +41,10 @@ def update_readme():
 
     folders = detect_existing_folders()
     new_practice_days = "| 📅 Day | 🔗 Link |\n|--------|---------|\n"
-    for day_num, folder_link, topic in folders:
-        # Fix encoding for GitHub links
-        encoded_link = quote(folder_link, safe='()')
-        new_practice_days += f"| 🟢 DAY {day_num}{topic} | [DAY_{day_num}]({encoded_link}) |\n"
+    for day_num, folder_name, topic in folders:
+        # Encode folder name for GitHub links
+        encoded_link = quote(folder_name)
+        new_practice_days += f"| 🟢 DAY {day_num}{topic} | [{folder_name}]({encoded_link}) |\n"
 
     updated_lines = lines[:start_index] + \
         [new_practice_days] + lines[end_index:]
