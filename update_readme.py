@@ -1,4 +1,5 @@
 import os
+import re
 
 # Constants
 README_FILE = "README.md"
@@ -24,10 +25,20 @@ Until next time, happy coding & keep solving! 🚀
 """
 
 # Get all folders that start with "DAY_"
-folders = sorted(
-    [f for f in os.listdir() if f.startswith("DAY_") and os.path.isdir(f)],
-    key=lambda x: int(x.split("_")[1])
-)
+folders = [f for f in os.listdir() if f.startswith("DAY_")
+           and os.path.isdir(f)]
+
+# Extract numeric day values safely
+
+
+def extract_day_number(folder_name):
+    match = re.search(r"DAY_(\d+)", folder_name)  # Extracts only the number
+    # Default to inf if no number
+    return int(match.group(1)) if match else float('inf')
+
+
+# Sort folders by their extracted numeric day
+folders = sorted(folders, key=extract_day_number)
 
 # Generate table rows
 rows = [
