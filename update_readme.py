@@ -1,5 +1,6 @@
 import os
 import re
+from urllib.parse import quote
 
 README_FILE = "README.md"
 
@@ -11,11 +12,11 @@ def detect_existing_folders():
             match = re.match(r"DAY_(\d{2})", folder)  # Extract day number
             if match:
                 day_num = match.group(1)
-                # Extract topic if present
                 topic_match = re.search(r"\(([^)]+)\)", folder)
-                # Keep empty if no topic
                 topic = f" ({topic_match.group(1)})" if topic_match else ""
-                folders.append((day_num, folder, topic))
+                # Ensure only "DAY_XX" is linked
+                folder_link = f"DAY_{day_num}"
+                folders.append((day_num, folder_link, topic))
     return folders
 
 
@@ -27,12 +28,11 @@ def update_readme():
     with open(README_FILE, "r", encoding="utf-8") as file:
         lines = file.readlines()
 
-    # Find the start and end of the practice days section
     start_index = None
     end_index = None
     for i, line in enumerate(lines):
         if "📅 Practice Days" in line:
-            start_index = i + 2  # Start after header
+            start_index = i + 2
         if "✍️ Signing Off" in line:
             end_index = i
             break
@@ -41,13 +41,12 @@ def update_readme():
         print("Practice Days section not found. Exiting.")
         return
 
-    # Extract and format the new practice days list
     folders = detect_existing_folders()
     new_practice_days = "| 📅 Day | 🔗 Link |\n|--------|---------|\n"
-    for day_num, folder_name, topic in folders:
-        new_practice_days += f"| 🟢 DAY {day_num}{topic} | [{folder_name}]({folder_name}) |\n"
+    for day_num, folder_link, topic in folders:
+        encoded_link = quote(folder_link)  # Encode for URLs
+        new_practice_days += f"| 🟢 DAY {day_num}{topic} | [DAY_{day_num}]({encoded_link}) |\n"
 
-    # Update README
     updated_lines = lines[:start_index] + \
         [new_practice_days] + lines[end_index:]
 
