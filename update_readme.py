@@ -4,91 +4,56 @@ import re
 README_FILE = "README.md"
 
 
-def extract_existing_sections():
-    """Extracts the header, practice days section, and signing off sections."""
+def detect_existing_folders():
+    folders = []
+    for folder in sorted(os.listdir()):
+        if os.path.isdir(folder):  # Ensure it's a folder
+            match = re.match(r"DAY_(\d{2})", folder)  # Extract day number
+            if match:
+                day_num = match.group(1)
+                # Extract topic if present
+                topic_match = re.search(r"\(([^)]+)\)", folder)
+                # Keep empty if no topic
+                topic = f" ({topic_match.group(1)})" if topic_match else ""
+                # Store (number, folder name, topic)
+                folders.append((day_num, folder, topic))
+    return folders
+
+
+def update_readme():
     if not os.path.exists(README_FILE):
-        return None, None, None
+        print("README.md not found. Exiting.")
+        return
 
     with open(README_FILE, "r", encoding="utf-8") as file:
         lines = file.readlines()
 
-    header, practice_days, signing_off = [], [], []
-    section = "header"
+    # Find the start and end of the practice days section
+    start_index = None
+    end_index = None
+    for i, line in enumerate(lines):
+        if "📅 Practice Days" in line:
+            start_index = i + 2  # Start after header
+        if "✍️ Signing Off" in line:
+            end_index = i
+            break
 
-    for line in lines:
-        if line.strip() == "## 📅 Practice Days":
-            section = "practice_days"
-            practice_days.append(line)
-            continue
-        elif line.strip() == "## ✍️ Signing Off":
-            section = "signing_off"
-            signing_off.append(line)
-            continue
-
-        if section == "header":
-            header.append(line)
-        elif section == "practice_days":
-            practice_days.append(line)
-        elif section == "signing_off":
-            signing_off.append(line)
-
-    return header, practice_days, signing_off
-
-
-def extract_existing_topics(practice_days):
-    """Extracts topics (like Binary Search, Linked List, etc.) from the existing table."""
-    topic_pattern = re.compile(r"\|\s*🟢 DAY (\d{2})\s*(\(.*\))?\s*\|")
-    topics = {}
-
-    for line in practice_days:
-        match = topic_pattern.search(line)
-        if match:
-            day = int(match.group(1))
-            topic = match.group(2) if match.group(2) else ""
-            topics[day] = topic.strip()
-
-    return topics
-
-
-def generate_practice_days_section(existing_topics):
-    """Generates the Practice Days section dynamically while preserving topics."""
-    num_days = max(existing_topics.keys(), default=-1) + \
-        1  # Auto-detect max day
-    new_days = num_days + 1  # Increment to add a new day
-
-    practice_days = ["\n## 📅 Practice Days\n",
-                     "🔹 Click on any Day to explore the problems!\n\n"]
-    practice_days.append("| 📅 Day | 🔗 Link |\n|--------|---------|\n")
-
-    for day in range(new_days):
-        day_label = f"🟢 DAY {day:02d}"
-        day_link = f"[DAY_{day:02d}](DAY_{day:02d})"
-
-        # Preserve existing topics
-        topic = existing_topics.get(day, "")
-        if topic:
-            day_label += f" {topic}"
-
-        practice_days.append(f"| {day_label} | {day_link} |\n")
-
-    return practice_days
-
-
-def update_readme():
-    """Updates README.md while preserving custom topics in the Practice Days section."""
-    header, practice_days, signing_off = extract_existing_sections()
-
-    if not header or not signing_off:
-        print("Error: Could not parse existing README.md structure!")
+    if start_index is None or end_index is None:
+        print("Practice Days section not found. Exiting.")
         return
 
-    existing_topics = extract_existing_topics(practice_days)
-    updated_practice_days = generate_practice_days_section(existing_topics)
+    # Extract and format the new practice days list
+    folders = detect_existing_folders()
+    new_practice_days = "| 📅 Day | 🔗 Link |\n|--------|---------|\n"
+    for day_num, folder_name, topic in folders:
+        new_practice_days += f"| 🟢 DAY {day_num}{topic} | [{folder_name}]({folder_name}) |\n"
 
-    new_readme_content = header + updated_practice_days + ["\n"] + signing_off
+    # Update README
+    updated_lines = lines[:start_index] + \
+        [new_practice_days] + lines[end_index:]
 
     with open(README_FILE, "w", encoding="utf-8") as file:
-        file.writelines(new_readme_content)
+        file.writelines(updated_lines)
 
     print("✅ README.md updated successfully!")
 
