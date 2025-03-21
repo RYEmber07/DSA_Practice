@@ -31,7 +31,7 @@ Each folder represents a **day of practice** and contains coding problems along 
 | 🟢 DAY 14 | [DAY_14](DAY_14) |
 | 🟢 DAY 15 | [DAY_15](DAY_15) |
 | 🟢 DAY 16 | [DAY_16](DAY_16) |
-| 🟢 DAY 17 | [DAY_17](DAY_17) |
+| 🟢 DAY 17 (Strings) | [DAY_17 (Strings)](DAY_17%20%28Strings%29) |
 | 🟢 DAY 18 | [DAY_18](DAY_18) |
 | 🟢 DAY 19 | [DAY_19](DAY_19) |
 ## ✍️ Signing Off
