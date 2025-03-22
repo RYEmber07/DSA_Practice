@@ -41,3 +41,11 @@ public:
         return ans;
     }
 };
+
+// TC O(n) 
+// We iterate over the input string s once, Each time, max_element(hash, hash + 62) finds the character with the highest frequency.This takes O(62) ≈ O(1) time. Finding Maximum Frequency Repeatedly(O(62 * N)) . Each time, max_element(hash, hash + 62) finds the character with the highest frequency.This takes O(62) ≈ O(1) time. Since we may need to find the max frequency up to N times(in the worst case where each character appears once), this results in O(N)* O(1) = O(N). Appending Characters to the Result(O(N)) . Each character is appended to ans exactly as many times as it appears in s, contributing another O(N).
+// SC O(n)
+// constant array is used and for returning ans . 
+
+// Approach: 
+// The code first counts the frequency of each character using a fixed - size array(hash[62]).It then repeatedly finds the character with the highest frequency, appends it to the result, and sets its frequency to zero.This ensures characters appear in descending order of frequency.
