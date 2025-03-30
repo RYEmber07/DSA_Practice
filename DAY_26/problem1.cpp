@@ -25,4 +25,4 @@ public:
     }
 };
 
-// TC O(n) SC O(1)s
+// TC O(n) SC O(1)
