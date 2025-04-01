@@ -43,6 +43,7 @@ Each folder represents a **day of practice** and contains coding problems along 
 | 🟢 DAY 26 | [DAY_26](DAY_26) |
 | 🟢 DAY 27 | [DAY_27](DAY_27) |
 | 🟢 DAY 28 | [DAY_28](DAY_28) |
+| 🟢 DAY 29 | [DAY_29](DAY_29) |
 ## ✍️ Signing Off
 Thanks for stopping by! 😃 This repository is my journey through DSA—learning, practicing, and improving one problem at a time.
 If you found this helpful, consider starring ⭐ the repo, sharing it, or contributing.
