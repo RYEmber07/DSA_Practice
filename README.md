@@ -46,6 +46,7 @@ Each folder represents a **day of practice** and contains coding problems along 
 | 🟢 DAY 29 | [DAY_29](DAY_29) |
 | 🟢 DAY 30 | [DAY_30](DAY_30) |
 | 🟢 DAY 31 | [DAY_31](DAY_31) |
+| 🟢 DAY 34 (Recursion) | [DAY_34 (Recursion)](DAY_34%20%28Recursion%29) |
 | 🟢 DAY 35 | [DAY_35](DAY_35) |
 | 🟢 DAY 36 | [DAY_36](DAY_36) |
 ## ✍️ Signing Off
