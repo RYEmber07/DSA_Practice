@@ -38,7 +38,7 @@ public:
     }
 };
 
-// TC O(n!){you can think fo it like for the first queen you had n options for column then n-1(at a upperbound) and so on} SC O(k*n^2){for board to return the ans , k is the no. of solutions} + O(n^2){current board} + O(n){the hash vectors} + O(n) {recursive stack space depth} 
+// TC O(n!){you can think of it like for the first queen you had n options for column then n-1(at a upperbound) and so on} SC O(k*n^2){for board to return the ans , k is the no. of solutions} + O(n^2){current board} + O(n){the hash vectors} + O(n) {recursive stack space depth} 
 
 // Approach : start by making a n*n board , You need to put every queen in a new row so lets start by placing the queen in the row and now vary the col the queen can be explore for each of such calls in this apporach used a hash to store if queen can be put at the place . 
 // this can be checked using usedCols data to check if there was any queen at the column for the rows above , left Diags have a property that row - col (need to store n-2 - (n-2) +1 values ) is always constant , whereas right Diags have a property that row + col is always constant .
